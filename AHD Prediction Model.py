@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
 
 
 #importing libraries used to create dataframe,to do calculations, and machine learning library
@@ -16,22 +12,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 
-# In[2]:
-
-
-#A
 #Read Heart Disease Data
 
 df = pd.read_csv('https://raw.githubusercontent.com/mpourhoma/CS4661/master/Heart_s.csv')
 
-#B
+
 df.head(5)
 
 
-# In[3]:
-
-
-#C
 #Keep Numerical Features in database
 feature_cols = ['Age','RestBP','Chol','RestECG','MaxHR','Oldpeak']
 
@@ -40,19 +28,10 @@ X = df[feature_cols]
 y = df['AHD']
 
 
-
-# In[4]:
-
-
-#D
 # Split data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=6)
 
 
-# In[5]:
-
-
-#E
 #Predicit Using Different Models
 k = 3
 knn = KNeighborsClassifier(n_neighbors=k) 
@@ -100,10 +79,6 @@ print("DescitionTree" ,score_dt)
 #WORST IS Descition Tree
 
 
-# In[6]:
-
-
-#F
 #Using One Hot Encoding on the Gender, Thal and Chest Pain columns
 one_hot_df = pd.get_dummies(df[['Gender','Thal','ChestPain']])
 
@@ -113,7 +88,7 @@ merged_df = pd.concat([df,one_hot_df],axis='columns')
 #Remove Categorical Columns
 new_df = merged_df.drop(['Gender','ChestPain','Thal'], axis='columns')
 
-#Repeat D & E
+#train data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=6)
 
 
@@ -158,27 +133,15 @@ print("LogisticReg:" ,score_lr)
 print("DescitionTree" ,score_dt)
 
 
-# In[7]:
+
 
 
 accuracy_list = cross_val_score(my_logreg, X, y, cv=10, scoring='accuracy')
-
 print(accuracy_list)
 
 
 accuracy_cv = accuracy_list.mean()
 
 print(accuracy_cv)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
 
 
